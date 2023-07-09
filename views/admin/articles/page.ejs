@@ -1,0 +1,40 @@
+<%- include("../../partials/header.ejs") %>
+<%- include("../../partials/homeNavBar") %>
+<body>
+    
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-10">
+                <% result.articles.rows.forEach((article)=>{ %>
+                    <div class="card">
+        
+                        <div class="card-header">
+                            <h4><%= article.title %></h4>
+                        </div>
+                        <div class="card-body">
+                            <a href="<%= article.slug %>" class="btn btn-outline-success">Ler artigo</a>
+                        </div>
+                
+                    </div>
+                <% }) %>
+            </div>
+
+            <div class="col-2">
+                <h4>Categorias</h4>
+                <div class="list-group">
+                    <% categories.forEach((category)=>{ %>
+                        <a href="/category/<%= category.slug %>" class="list-group-item list-group-item-action"><%= category.title %></a>
+                    <% }) %>
+                  </div>
+            </div>
+
+        </div>
+        <%- include("../../partials/pagination.ejs") %>
+    </div>
+
+
+</body>
+
+<%- include("../../partials/footer.ejs") %>

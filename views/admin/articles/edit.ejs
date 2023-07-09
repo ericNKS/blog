@@ -1,0 +1,53 @@
+<%- include("../../partials/header") %>
+
+<%- include("../../partials/navBar") %>
+
+<div class="container">
+    <hr>
+    <div class="card">
+
+        <div class="card-header">
+            <h2>Cadastro de artigos</h2>
+        </div>
+        <div class="card-body">
+            <form action="/articles/update" method="post">
+                <input type="hidden" name="id" value="<%= article.id %>">
+                <input class="form-control mb-4" type="text" name="title" placeholder="Defina o titulo da categoria" value="<%= article.title %>">
+                <textarea name="body" placeholder="Escreva o artigo aqui" class=" mb-4 form-control" id="article"></textarea>
+                <label for="category">Categorias</label>
+                <select id="category" name="category" class="form-control">
+                    <option>Escolha a categoria</option>
+                    <% categories.forEach((category)=>{ %>
+                        <% if(category.id == article.categoryId){ %>
+                            <option value="<%= category.id %>" selected><%= category.title %></option>
+                        <% }else{ %>
+                            <option value="<%= category.id %>"><%= category.title %></option>
+                        <% } %>
+                    <% }) %>
+
+                </select>
+                <button class="btn btn-success mt-2" type="submit">Editar</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div id="content" style="display: none;">
+    <%- article.body %>
+</div>
+
+<%- include("../../partials/footer") %>
+<script src="/js/tinymce/tinymce.min.js"></script>
+
+<script>
+    let content = document.querySelector("#content").innerHTML;
+    tinymce.init({
+        language: 'pt_BR',
+        selector: "#article",
+        plugins: 'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons',
+        init_instance_callback: ()=>{
+            tinymce.get('article').setContent(content)
+        }
+    })
+</script>

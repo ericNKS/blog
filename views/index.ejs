@@ -1,0 +1,54 @@
+<%- include("partials/header.ejs") %>
+<%- include("partials/homeNavBar") %>
+<body>
+    
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-10">
+                <div class="jumbotron">
+                    <h1 class="display-4">Bem-Vindo!</h1>
+                    <p class="lead">Este é o blog do melhor programador! *Éric*</p>
+                    <hr class="my-4">
+                    <p>Construir essa aplicação para aprender o desenvolvimento de aplicações com node.js</p>
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                </div>
+        
+                <% articles.forEach((article)=>{ %>
+                    <div class="card">
+        
+                        <div class="card-header">
+                            <h4><%= article.title %></h4>
+                        </div>
+                        <div class="card-body">
+                            <a href="<%= article.slug %>" class="btn btn-outline-success">Ler artigo</a>
+                        </div>
+                
+                    </div>
+                <% }) %>
+            </div>
+
+            <div class="col-2">
+                <h4>Categorias</h4>
+                <div class="list-group">
+                    <% categories.forEach((category)=>{ %>
+                        <a href="/category/<%= category.slug %>" class="list-group-item list-group-item-action"><%= category.title %></a>
+                    <% }) %>
+                  </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col col-10">
+                <a href="/articles/page/2" style="float: right">NEXT>>></a>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+<%- include("partials/footer.ejs") %>
